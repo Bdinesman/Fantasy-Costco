@@ -48,24 +48,14 @@ class HomeController extends Controller
         return view('home');
     }
     public function search(Request $request){
-        if(!$request->has('search')){
-            $items=\App\Item::all();
+        $search=$request->get('category');
+        if($request->has('category')){
+            $items=\App\Item::paginate(5)->where('keywords','like','%' . $request->get('category') . '%')->get();
         }
-        $keywordsArray=[];
-        foreach ($items as $item) {
-            $keywords=explode(',',$item->keywords);
-            foreach ($keywords as $keyword) {
-                if(!in_array($keyword,$keywordsArray)){
-                    $keywordsArray[]=trim($keyword);
-                }
-            }
+        if(!$request->has('category') && !$request->has('keyword')){
+                $items=\App\Item::paginate(100);
         }
-        $string[]='[';
-        foreach ($keywordsArray as $word) {
-            $string[0].="'$word',";
-        }
-        $string[0].=']';
-        $data=compact('items','string');
+        $data=compact('items','search');
         return view('search',$data);
     }
     /**

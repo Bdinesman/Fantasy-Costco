@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Auth;
 
 class ItemsController extends Controller
 {
@@ -48,7 +49,13 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        //
+        $item=\App\Item::where('item_id',$id)->first();
+        if(Auth::check()){
+            $user=\App\User::where('id',Auth::user()->id);
+        }
+        $keywords=explode(',',$item->keywords);
+        $data=compact('item','data','keywords');
+        return view('items.show',$data);
     }
 
     /**

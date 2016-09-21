@@ -15,6 +15,9 @@ Route::get('/','HomeController@index');
 Route::post('/','HomeController@index');
 Route::get('/dashboard','UsersController@index');
 Route::get('/inventory/all','HomeController@search');
+Route::get('/inventory/','HomeController@search');
+//Item Routes
+Route::get('/item/{id}','ItemsController@show');
 Route::get('/login','HomeController@getLogin');
 Route::post('/login','HomeController@authenticate');
 Route::get('/register','UsersController@create');

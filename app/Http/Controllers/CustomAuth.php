@@ -6,9 +6,22 @@ use Illuminate\Http\Request;
 
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
-
+use Illuminate\Support\Facades\Auth;
 class CustomAuth extends Controller
 {
+    public function authenticate(){
+        if (!Auth::attempt(['email' => $email, 'password' => $password])) {
+                if (Auth::attempt(['username' => $username, 'password' => $password])) {
+                // Authentication passed...
+                return redirect()->intended('/');
+            }
+            return back()
+        }
+        if (Auth::attempt(['email' => $email, 'password' => $password])) {
+            // Authentication passed...
+            return redirect()->intended('/');
+        }
+    }
     /**
      * Display a listing of the resource.
      *
