@@ -49,7 +49,7 @@ class UsersController extends Controller
         $user->phone_number=$request->input('phone_number');
         $user->address_line_1=$request->input('address_line_1');
         $user->address_line_2=$request->input('address_line_2');
-        $user->zip_code=$request->input('zip');
+        $user->zip_code=$request->input('zip_code');
         $user->state=$request->input('state');
         $user->save();
         var_dump($user);

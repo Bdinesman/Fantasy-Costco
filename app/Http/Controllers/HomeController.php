@@ -11,6 +11,60 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function addToCart(Request $request){
+        if(!Auth::check()){
+            //Flash to session please login
+            return redirect('/login');
+        }
+        $cart = new \App\Cart();
+        $cart->user_id=Auth::user()->id;
+        $cart->quantity=$request->quantity;
+        $cart->item_id=$request->item_id;
+        $cart->save();
+        return $cart;
+    }
+    public function viewCart(Request $request){
+        $total=0;
+        $carts=\App\Cart::where('user_id',Auth::user()->id)->get();
+        foreach ($carts as $key => $cart) {
+            foreach ($cart->items as $key => $item) {
+                $total+=($item->item_price * $cart->quantity);
+            }
+        }
+        $data=compact('carts','total');
+        return view('users.view_cart',$data);
+    }
+    public function checkout(Request $request){
+        if(!Auth::check()){
+            return redirect('/login');
+        }
+        $user=\App\User::where('id',Auth::user()->id)->first();
+        $total=0;
+        foreach ($request->cart as $key => $value) {
+            if(intval($value['item_id'])<=0){
+                return back();
+            }
+            $item=\App\Item::where('id',intval($value['item_id']))->first();
+            if(sizeof($item)==0){
+                return back();
+            }
+            $quantity=intval($value['quantity']);
+            $total+=$item->item_price * $quantity;
+        }
+        if($total>$user->gold){
+            $alert=$request->session()->flash('alert','danger');
+            $message=$request->session()->flash('message','Insufficent Funds');
+            $data=compact('alert','message');
+            return redirect()->back();
+        }
+        $user->gold=$user->gold-$total;
+        $user->save();
+        $carts=\App\Cart::where('user_id',$user->id)->get();
+        foreach ($carts as $cart) {
+            $cart->delete();
+        }
+        return $user->gold;
+    }
     public function authenticate(Request $request){
         $email=$request->input('username/email');
         $username=$request->input('username/email');

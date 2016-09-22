@@ -49,7 +49,7 @@ class ItemsController extends Controller
      */
     public function show($id)
     {
-        $item=\App\Item::where('item_id',$id)->first();
+        $item=\App\Item::where('id',$id)->first();
         if(Auth::check()){
             $user=\App\User::where('id',Auth::user()->id);
         }

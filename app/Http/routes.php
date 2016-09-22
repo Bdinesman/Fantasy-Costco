@@ -13,11 +13,15 @@
 
 Route::get('/','HomeController@index');
 Route::post('/','HomeController@index');
+//User Routes
 Route::get('/dashboard','UsersController@index');
+Route::get('/cart/view','HomeController@viewCart');
+Route::post('/cart/view','HomeController@checkout');
 Route::get('/inventory/all','HomeController@search');
 Route::get('/inventory/','HomeController@search');
 //Item Routes
 Route::get('/item/{id}','ItemsController@show');
+Route::post('/item/{id}','HomeController@addToCart');
 Route::get('/login','HomeController@getLogin');
 Route::post('/login','HomeController@authenticate');
 Route::get('/register','UsersController@create');

@@ -23,6 +23,8 @@
 		}
 	}
 </style>
+<form method="POST" action="">
+{!!csrf_field()!!}
 <div class="col-sm-12">
 	<h1>{{$item->item_name}}</h1>
 </div>
@@ -56,10 +58,10 @@
 <div class="col-sm-12 col-md-6">
 	<div class="col-sm-4 col-md-4">
 		<label for="quantity" style="">Qty
-		<input type="text" style="float:none" id="quantity" class="col-sm-2"></label>
+		<input type="text" style="float:none" name="quantity" id="quantity" class="col-sm-2"></label>
 	</div>
 	<div class="col-sm-8 col-md-8">
-		<button type="button" class="btn btn-primary col-sm-8 col-md-12">Add to Cart</button>
+		<button type="submit" name="item_id" value="{{$item->id}}"class="btn btn-primary col-sm-8 col-md-12">Add to Cart</button>
 	</div>
 </div>
 <div class="col-sm-12 col-md-6">
@@ -74,4 +76,5 @@
 <div class="col-sm-12">
 	<h3 class="col-sm-10 col-md-11">Warranty & Services</h3><span class="text-sm-right pull-md-right">+</span>
 </div>
+</form>
 @stop
