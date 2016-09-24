@@ -50,11 +50,20 @@ class ItemsController extends Controller
     public function show($id)
     {
         $item=\App\Item::where('id',$id)->first();
-        if(Auth::check()){
-            $user=\App\User::where('id',Auth::user()->id);
+        $rating_value=[];
+        $ratings=\App\Rating::where('item_id',$id)->get();
+        foreach ($ratings as $rating) {
+            $rating_value[]=$rating->rating;
         }
+        $average=array_sum($rating_value);
         $keywords=explode(',',$item->keywords);
-        $data=compact('item','data','keywords');
+        if(Auth::check()){
+            $user=\App\User::where('id',Auth::user()->id)->first();
+            $data=compact('item','data','keywords','user','ratings','average');
+
+        }else{
+            $data=compact('item','data','keywords','ratings','average');
+        }
         return view('items.show',$data);
     }
 

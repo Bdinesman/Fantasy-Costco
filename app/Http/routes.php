@@ -21,7 +21,9 @@ Route::get('/inventory/all','HomeController@search');
 Route::get('/inventory/','HomeController@search');
 //Item Routes
 Route::get('/item/{id}','ItemsController@show');
-Route::post('/item/{id}','HomeController@addToCart');
+Route::post('/cart/add/{id}','HomeController@addToCart');
+Route::post('/rating/add','HomeController@addRating');
+Route::get('/rating/add','HomeController@addRating');
 Route::get('/login','HomeController@getLogin');
 Route::post('/login','HomeController@authenticate');
 Route::get('/register','UsersController@create');

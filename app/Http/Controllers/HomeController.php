@@ -11,6 +11,34 @@ use Illuminate\Support\Facades\Auth;
 
 class HomeController extends Controller
 {
+    public function addRating(Request $request){
+        if(!$request->ajax()){
+           abort(403);
+        }
+        $item_id=strip_tags($request->input('item_id'));
+        $user_id=strip_tags(Auth::user()->id);
+        $previousReviews=\App\Rating::where('user_id',$user_id)->where('item_id',$item_id)->count();
+        //Check if they have already submitted a review
+        if($previousReviews>0){
+            return response()->json(['alert'=>'alert-info','message'=>'You have already submitted a review for this product']);
+        }
+        $rating=intval(strip_tags($request->input('rating')));
+        if($rating>5 || $rating<1){
+            return response()->json(['alert'=>'alert-warning','message'=>'Review could not be uploaded']);
+        }
+        $response=strip_tags($request->input('review'));
+        $title=strip_tags($request->input('title'));
+        $newRating = new \App\Rating();
+        //Check to see if they have already posted a review
+        $newRating->item_id=$item_id;
+        $newRating->user_id=$user_id;
+        $newRating->rating=$rating;
+        $newRating->review=$response;
+        $newRating->title=$title;
+        //Ensure that values weren't tampered with
+        $newRating->save();
+        return response()->json(['alert'=>'alert-success','message'=>'Review added!']);
+    }
     public function addToCart(Request $request){
         if(!Auth::check()){
             //Flash to session please login

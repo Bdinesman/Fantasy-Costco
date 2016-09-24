@@ -46,7 +46,17 @@
 			<img class="img_thumbnail" src="{{$item->img_path}}">
 			<p>{{$item->item_price}} Gold</p>
 			<p>{{$item->item_name}}</p>
-			<p>Item Not Yet Rated</p>
+			@if($item->ratings()['average']==0)
+				<p>No ratings available</p>
+			@else
+				@for($i=0;$i<$item->ratings()['average'];$i++)
+				<span class="glyphicon glyphicon-star"></span>
+				@endfor
+				@for($i=$item->ratings()['average'];$i < 5;$i++)
+				<span class="glyphicon glyphicon-star-EMPTY"></span>
+				@endfor
+				({{$item->ratings()['numberOfResponses']}})
+			@endif
 		</div>
 	@endforeach
 	</div>
