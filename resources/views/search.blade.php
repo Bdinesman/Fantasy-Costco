@@ -1,66 +1,92 @@
 @extends('home')
 @section('content')
-<style>
-	.entry{
-		border-bottom:3px solid black;
-	}
-	footer{
-		display:none;
-	}
-	.item{
-		border-bottom:1px solid black;
-	}
-	.img_thumbnail{
-		height:190px;
-		width:auto;
-		padding:15px;
-	}
-	.item:last-child{
-		border-bottom: none;
-	}
-	.float-right{
-		float:right;
-	}
-</style>
-<div class="col-md-12">
-	Results for "{{$search}}"
+	<style>
+		.thumbnail{
+			width:25%;
+			height:auto;
+		}
+		footer{
+			display: none;
+		}
+		.float-right{
+			float:right;
+		}
+		@media (max-width:768px){
+			.hide-sm{
+				display:none;
+			}
+		}
+	</style>
+	<div class="col-sm-12 col-xs-0">
+		Showing 1-{{count($items)}} out of {{count($items)}}
+	</div>
+	<div class="col-sm-3 hide-sm">
+		<div class="col-sm-12">Filter Results <span class="float-right">Clear All</span></div>
+		<div class="col-sm-12">Category<span class="float-right">+</span>
+		@foreach($categories as $category=>$array)
+			<div class="col-sm-12">
+				<input class="col-sm-1" type="checkbox">
+				<span class="col-sm-10">{{$category}} ({{count($array)}})</span>
+			</div>
+		@endforeach
+		</div>
+		<div class="col-sm-12">Price<span class="float-right">+</span>
+			@foreach($prices as $price=>$count)
+				<div class="col-sm-12">
+				<input class="col-sm-1" type="checkbox">
+				<span class="col-sm-10">{{$price}} ({{$count}})</span>
+			</div>
+
+			@endforeach
+		</div>
+		<div class="col-sm-12">Keyword<span class="float-right">+</span>
+			@foreach($keywords as $key=>$keyword)
+			@if($key < 10)
+			<div class="col-sm-12">
+				<input class="col-sm-1" type="checkbox">
+				<span class="col-sm-10 text-capitalize">{{$keyword}}</span>
+			</div>
+			@endif
+			@if($key==11)
+			<div class="col-sm-12">
+				See All
+			</div>
+			@endif
+			@if($key>=11)
+			<div class="hide col-sm-12">{{$keyword}}</div>
+			@endif
+		@endforeach
 </div>
-<div class="mobile col-sm-12 form-group" style="border-bottom:1px solid grey;border-top: 1px solid grey;padding-top: 20px;padding-bottom: 20px">
-		<label style="padding-right:0px" class="col-sm-1" for="selectMobile">Sort by:</label>
-	<div class="col-sm-10" style="padding-left:0px">
-		<select id="selectMobile" class="form-control">
+	</div>
+	<div class="col-xs-12 col-sm-9">
+		<div class="col-sm-12 form-group">
+		Sort by 
+		<select class="form-control">
 			<option value="high-to-low">Price (High to Low)</option>
 			<option value="low-to-high">Price (Low to High)</option>
-			<option value="a-z">Alphabetical (A to Z)</option>
-			<option value="Z-a">Alphabetical (Z to A)</option>
+			<option value="a-to-z">Name (A to Z)</option>
+			<option value="z-to-a">Name (Z to A)</option>
+			<option value="rating">Rating (High to Low)</option>
 		</select>
 	</div>
-	</div>
-</div>
-<div class="col-md-12">
-	<div class="col-md-2">
-	</div>
-	<div class="col-md-10 item results">
-	@foreach($items as $key=>$item)
-		<div class="col-md-3 col-sm-6 item">
-			<img class="img_thumbnail" src="{{$item->img_path}}">
-			<p>{{$item->item_price}} Gold</p>
+
+	@foreach($items as $item)
+		<div class="col-xs-6 col-sm-4 col-md-4">
+			<img class="thumbnail" src="{{$item->img_path}}">
+			<p>{{$item->item_price}}</p>
 			<p>{{$item->item_name}}</p>
-			@if($item->ratings()['average']==0)
-				<p>No ratings available</p>
+			@if($item->average_rating()==0)
+			<p>No ratings to display</p>
 			@else
-				@for($i=0;$i<$item->ratings()['average'];$i++)
-				<span class="glyphicon glyphicon-star"></span>
+				@for($i=0;$i<$item->average_rating();$i++)
+					<span class="glyphicon glyphicon-star"></span>
 				@endfor
-				@for($i=$item->ratings()['average'];$i < 5;$i++)
-				<span class="glyphicon glyphicon-star-EMPTY"></span>
+				@for($i=$item->average_rating();$i < 5; $i++)
+					<span class="glyphicon gplyphicon-star-empty"></span>
 				@endfor
-				({{$item->ratings()['numberOfResponses']}})
+				({{count($item->ratings())}})
 			@endif
 		</div>
 	@endforeach
 	</div>
-</div>
-{!! $items->render()!!}
-</div>
 @stop

@@ -11,50 +11,105 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
 </head>
 <body>
-
-<header>
-    <div id="main-header-bar">
-        <div id="logo-div">
-            <a href="/"><img id="logo" src="/img/Fantasy-Costco-by-Ryanphantom.png"></a>
-        </div>
-        <div id="search-bar-div">
-            <div id="search-bar-inner-div">
-            <form method="GET" style="margin-top:0px">
-                <input type="text" id="searchbar" name="search">
-                <input type="image" src="/img/loupe.svg" id="search-icon">
-            </form>
+<style>
+    header{
+        display:none;
+    }
+    nav{
+        background-color:rgb(239,239,239);
+    }
+    nav>div{
+        padding-top: 10px;
+        background-color:rgb(239,239,239);
+    }
+    .border-right{
+        border-right: 1px solid navy;
+    }
+    .align-center{
+        text-align: left;
+    }
+    .sm-icon{
+        font-size: 1.8rem;
+    }
+    .no-padding-left{
+    }
+    .nav-option{
+        min-width:50px;
+    }
+    .logo{
+        min-width: 120px;
+        min-height: 40px;
+    }
+    .md{
+        display:none;
+    }
+    @media (min-width:675px){
+        .search{
+            width:50%;
+        }
+        .md{
+            display:block;
+        }
+        .sm{
+            display:none;
+        }
+    }
+    @media (min-width:775px){
+        .md{
+            display:none;
+        }
+        .sm{
+            display:none;
+        }
+        .lg{
+            display:block;
+        }
+    }
+</style>
+<nav>
+    <div class="col-xs-12" style="padding-right:0;padding-left:0px">
+        <img class="col-xs-3 logo" src=/img/Fantasy-Costco-by-Ryanphantom.png>
+        <div class="col-xs-offset-5 col-xs-4 sm" style="text-align:center;padding-right:0;min-width:163px">
+            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
+                <span class="glyphicon sm-icon glyphicon-map-marker"></span>
+                <span class="align-center" style="font-size:1rem">Location</span>
             </div>
-        </div>
-        <div id="medium-content-menu">
-            <div class="iconDiv pin">
-                <img class="icon" src="/img/location-pin.svg">
-                <span class="iconText">Locations</span>
+            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
+                <span class="glyphicon sm-icon glyphicon-user"></span>
+                <span style="font-size:1rem">Account</span>
             </div>
-            <div class="iconDiv user">
-                <img class="icon" src="/img/user-silhouette.svg">
-                <span class="iconText">Account</span>
-            </div>
-            <div class="iconDiv cart">
-                <img class="icon" src="/img/commerce.svg">
-                <span class="iconText">Cart</span>
+            <div class="col-xs-4 nav-option" >
+                <span class="glyphicon sm-icon glyphicon-shopping-cart" ></span>
+                <span style="font-size:1rem">Cart</span>
             </div>
         </div>
     </div>
-    <div id="search-div">
-        <div class="leftMenu">
-            <a href="/?category=Consumable" class="option">Consumables</a>
-            <a href="/?category=Equipment" class="option">Equipment</a>
-            <a href="/?category=Weapon" class="option">Weapons</a>
-            <a href="/?category=Misc" class="option">Misc</a>
+    <div class="col-xs-12">
+        <div class="col-xs-2" style="padding-left:0px;padding-right:0px">
+            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-align-justify"></span> Shop</button>
         </div>
-        <div class="rightMenu">
-            <?php if (isset($_SESSION["LOGGED_IN_ID"])) : ?>
-                <a href="#" class="option">Welcome, <?=isset($_SESSION['IS_LOGGED_IN']) ? $_SESSION['IS_LOGGED_IN'] : "" ?></p>
-                <a href="logout.php" class="option">Log Out</a>
-            <?php endif; ?>
+        <div class="col-xs-10 search" style="padding-right:0px;padding-left:0px;margin-left:0px">
+            <input type="text" class="form-control"><span style="float:right;margin-right:5px;top:-2.7rem;font-size:2rem" class="glyphicon glyphicon-search"></span>
+        </div>
+        <div class="md col-xs-4" style="text-align:center;padding-right:0;min-width:163px">
+            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
+                <span class="glyphicon sm-icon glyphicon-map-marker"></span>
+                <span class="align-center" style="font-size:1rem">Location</span>
+            </div>
+            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
+                <span class="glyphicon sm-icon glyphicon-user"></span>
+                <span style="font-size:1rem">Account</span>
+            </div>
+            <div class="col-xs-4 nav-option" >
+                <span class="glyphicon sm-icon glyphicon-shopping-cart" ></span>
+                <span style="font-size:1rem">Cart</span>
+            </div>
         </div>
     </div>
-</header>
+    <div style="width:100%;background-color: red">
+    <p>Test</p>
+    </div>
+</nav>
 @yield('content')
 <footer>
     <div class="footerContainer">

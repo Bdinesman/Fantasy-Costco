@@ -131,13 +131,75 @@ class HomeController extends Controller
     }
     public function search(Request $request){
         $search=$request->get('category');
-        if($request->has('category')){
-            $items=\App\Item::paginate(5)->where('keywords','like','%' . $request->get('category') . '%')->get();
+        $range=$request->get('range');
+        if(!empty($request->get('category'))){
+            $category=ucfirst($request->get('category'));
         }
-        if(!$request->has('category') && !$request->has('keyword')){
-                $items=\App\Item::paginate(100);
+        if($request->has('keyword')){
+                $items=\App\Item::where('keywords','like','%' . $request->get('keyword') . '%')->get();
         }
-        $data=compact('items','search');
+        if(isset($category)){
+            if(isset($items)){
+                $items=$items->where('category',$category);
+            }else{
+                $items=\App\Item::where('category',$category)->get();
+            }
+        }
+        if(isset($range)){
+            if(!isset($items)){
+                $items=\App\Item::all();
+            }
+            if($range=='<50'){
+                $items=$items->filter(function($item){
+                    return $item->item_price < 50;});
+                }
+                if($range=='50-100'){
+                    $items=$items->filter(function($item){
+                    return $item->item_price > 50 && $item->item_price<=100;});
+                }
+                if($range=='100-500'){
+                    $items=$items->filter(function($item){
+                    return $item->item_price > 100 && $item->item_price<=500;});
+                }
+                if($range=='500-1000'){
+                    $items=$items->filter(function($item){
+                    return $item->item_price > 500 && $item->item_price<=1000;});
+
+                }
+                if($range=='>1000'){
+                    $items=$items->filter(function($item){
+                    return $item->item_price > 1000;});
+                }
+        }
+        $categories=$items->groupBy('category');
+        $keywords=[];
+        foreach ($items as $item) {
+            foreach(explode(',',$item->keywords) as $keyword){
+                if(!empty($keyword)){
+                    $keywords[]=$keyword;
+                }
+            }
+        }
+        $keywords=array_unique($keywords);
+        $prices=['Less than 50'=>0,'50-100'=>0,'100-500'=>0,'500-1000'=>0,'More than 1000' =>0];
+        foreach($items->groupBy('item_price') as $price=>$value){
+            if(intval($price)<50){
+                $prices['Less than 50']+=count($value);
+            }
+            if(intval($price)>=50 && intval($price)<100){
+                $prices['50-100']+=count($value);
+            }
+            if(intval($price)>=100 && intval($price)<500){
+                $prices['100-500']+=count($value);
+            }
+            if(intval($price)>=500 && intval($price)<1000){
+                $prices['500-1000']+=count($value);
+            }
+            if(intval($price)>1000){
+                $prices['More than 1000']+=count($value);
+            }
+        }
+        $data=compact('items','search','categories','keywords','prices');
         return view('search',$data);
     }
     /**
