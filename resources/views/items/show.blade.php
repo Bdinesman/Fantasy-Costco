@@ -105,7 +105,7 @@
 			{{$rating->title}}
 			</div>
 			<div class="col-md-12">
-			Written by {{\App\User::where('id',$rating->user_id)->first()->username}} on {{substr($rating->created_at,0,10)}}
+			Written by {{$rating->author()}} on {{substr($rating->created_at,0,10)}}
 			</div>
 			<div class="col-md-12">
 				{{$rating->review}}
@@ -187,7 +187,15 @@ $(document).ready(function(){
 			$(target).addClass('locked');
 		}
 	});
-	$('.submit_review').click(function(){
+	$('#expand-reviews').click(function(){
+		$('.toggle-review').toggle();
+	});
+});
+</script>
+@if(isset($user))
+<script>
+	$(document).ready(function(){
+			$('.submit_review').click(function(){
 		$.ajax(
 		{
 			headers:{
@@ -207,9 +215,7 @@ $(document).ready(function(){
 			$('#review').prop('disabled','true');
 		});
 	});
-	$('#expand-reviews').click(function(){
-		$('.toggle-review').toggle();
-	});
 });
 </script>
+@endif
 @stop

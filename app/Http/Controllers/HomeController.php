@@ -110,7 +110,15 @@ class HomeController extends Controller
             return redirect()->intended('/');
         }
     }
-
+    public function logout(Request $request){
+        if(Auth::check()){
+            Auth::logout();
+            $request->session()->flash('alert','success');
+            $request->session()->flash('message','You have successfully logged out');
+            return redirect('/');
+        }
+        return back();
+    }
     public function getLogin(){
         if(Auth::check()){
             return redirect('/');
@@ -170,6 +178,9 @@ class HomeController extends Controller
                     $items=$items->filter(function($item){
                     return $item->item_price > 1000;});
                 }
+        }
+        if(!isset($items)){
+            $items=\App\Item::all();
         }
         $categories=$items->groupBy('category');
         $keywords=[];

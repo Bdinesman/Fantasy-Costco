@@ -19,6 +19,7 @@ Route::get('/cart/view','HomeController@viewCart');
 Route::post('/cart/view','HomeController@checkout');
 Route::get('/inventory/all','HomeController@search');
 Route::get('/inventory/','HomeController@search');
+Route::get('/logout','HomeController@logout');
 //Item Routes
 Route::get('/item/{id}','ItemsController@show');
 Route::post('/cart/add/{id}','HomeController@addToCart');
@@ -28,4 +29,7 @@ Route::get('/login','HomeController@getLogin');
 Route::post('/login','HomeController@authenticate');
 Route::get('/register','UsersController@create');
 Route::post('/register','UsersController@store');
-
+//Test Routes
+Route::get('/nav',function(){
+	return view('partials.nav');
+});
