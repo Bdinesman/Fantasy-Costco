@@ -1,27 +1,43 @@
+.header {
+	height: 120px;
+	display: block;
+	flex-direction: row;
+	background-color: #efefef;
+	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
+	margin-bottom: 50px;
+	margin-top: -24px;
+	padding-top: 30px;
+}
 @media (max-width: 667px){
+	.header{
+		height:175px;
+		color:#3071a9;
+	}
 	#logo{
-		height: 33px;
-		width:112px;
+		height: 55px;
+		width:170px;
+		top: -5px;
 	}
 	.icon-menu{
 		position:relative;
 		float:right;
-		min-width:160px;
-		min-height:21px;
-		max-height: 41px;
+		min-width:180px;
+		min-height:;
+		max-height: 75px;
 		display: flex;
 		text-align:center;
 		padding:0px 10px 0 10px;
 		margin-bottom: 5px;
+		left:-15px 
 	}
 	.icon-menu>div{
 		position:relative;
-		font-size:1rem;
-		padding:0 5px 0 5px;
+		font-size:1.8rem;
+		padding:5px 10px 0 10px;
 		float:right;
 	}
 	.nav-icon{
-		font-size:2rem;
+		font-size:3rem;
 	}
 	.cart-div{
 		width:8px;
@@ -33,10 +49,40 @@
 		width:66px;
 	}
 	.search-nav{
-		display:flex;
+		display:flex;	
 	}
-	.search-nav>button{
-		height:40px;
+	.shop-button{
+		min-width: 125px;
+		height: 55px;
+		font-size:2.5rem;
+		font-weight: lighter;
+		padding: 5px;
+		padding-top: 10px;
+		text-align: center;
+		font-weight:lighter;
+	}
+	.shop-button>span{
+		font-size: 3rem;
+		margin-right:5px;
+	}
+	.search-bar{
+		padding-left:0px;
+	}
+	#search-bar{
+		height:55px;
+	}
+	.glyphicon.glyphicon-search{
+		position:relative;
+		float:right;
+		font-size:3.5rem;
+		top:-3.5rem;
+		margin-right: 15px;
+		-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; 
 	}
 }
 html {
@@ -56,17 +102,6 @@ body {
 	background-color:#3071a9;
 }
 /*Header & Navigation*/
-
-.header {
-	height: 120px;
-	display: block;
-	flex-direction: row;
-	background-color: #efefef;
-	box-shadow: 0 1px 2px 0 rgba(0,0,0,0.2);
-	margin-bottom: 50px;
-	margin-top: -24px;
-	padding-top: 30px;
-}
 
 aside {
     /* Give the sidebar a default width, and prevent it from shrinking */

@@ -30,11 +30,11 @@
 			</div>
 		</div>
 		<div class="col-xs-12 search-nav">
-			<div class="col-xs-3 bg-primary"><span class="glyphicon glyphicon-menu-hamburger"></span>Shop
+			<div class="col-xs-2 bg-primary shop-button"><span class="glyphicon glyphicon-menu-hamburger"></span>Shop
 			</div>
-			<div class="col-xs-9" style="padding-right:0px">
-				<input type="text" class="form-control">
-				<span style="float:right"class="glyphicon glyphicon-search"></span>
+			<div class="col-xs-10" style="padding-right:0px;padding-left: 0px;position:relative;left:5px;">
+				<input type="text" class="form-control" id="search-bar">
+				<span class="glyphicon glyphicon-search"></span>
 			</div>
 		</div>
 	</nav>
