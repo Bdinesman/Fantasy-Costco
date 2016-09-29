@@ -52,6 +52,9 @@ class HomeController extends Controller
         return $cart;
     }
     public function viewCart(Request $request){
+        if(!Auth::check()){
+            return redirect('/register');
+        }
         $total=0;
         $carts=\App\Cart::where('user_id',Auth::user()->id)->get();
         foreach ($carts as $key => $cart) {
@@ -133,9 +136,10 @@ class HomeController extends Controller
     public function index(Request $reqeust)
     {
         //$user=$request->session()->user();
-        //$data=compact('user');
-        return 'Currently under development';
-        return view('home');
+        $message="Currently under development";
+        $javascript="";
+        $data=compact('message','javascript');
+        return view('home',$data);
     }
     public function search(Request $request){
         $search=$request->get('category');

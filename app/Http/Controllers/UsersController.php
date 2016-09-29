@@ -17,6 +17,9 @@ class UsersController extends Controller
      */
     public function index(Request $request)
     {
+        if(!Auth::check()){
+            redirect('/register');
+        }
         $user=Auth::user();
         $data=compact('user');
         return view('dashboard',$data);

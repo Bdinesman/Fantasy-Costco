@@ -9,107 +9,73 @@
 
 <!-- Latest compiled and minified JavaScript -->
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+<audio id="theme">
+    <source src="/audio/Fantasy Costco Theme.mp3" type="audio/mpeg">
+</audio>
 </head>
 <body>
-<style>
-    header{
-        display:none;
-    }
-    nav{
-        background-color:rgb(239,239,239);
-    }
-    nav>div{
-        padding-top: 10px;
-        background-color:rgb(239,239,239);
-    }
-    .border-right{
-        border-right: 1px solid navy;
-    }
-    .align-center{
-        text-align: left;
-    }
-    .sm-icon{
-        font-size: 1.8rem;
-    }
-    .no-padding-left{
-    }
-    .nav-option{
-        min-width:50px;
-    }
-    .logo{
-        min-width: 120px;
-        min-height: 40px;
-    }
-    .md{
-        display:none;
-    }
-    @media (min-width:675px){
-        .search{
-            width:50%;
-        }
-        .md{
-            display:block;
-        }
-        .sm{
-            display:none;
-        }
-    }
-    @media (min-width:775px){
-        .md{
-            display:none;
-        }
-        .sm{
-            display:none;
-        }
-        .lg{
-            display:block;
-        }
-    }
-</style>
-<nav>
-    <div class="col-xs-12" style="padding-right:0;padding-left:0px">
-        <img class="col-xs-3 logo" src=/img/Fantasy-Costco-by-Ryanphantom.png>
-        <div class="col-xs-offset-5 col-xs-4 sm" style="text-align:center;padding-right:0;min-width:163px">
-            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
-                <span class="glyphicon sm-icon glyphicon-map-marker"></span>
-                <span class="align-center" style="font-size:1rem">Location</span>
+    <nav class="header">
+        <div class="col-lg-12" >
+            <a href="/"><img src="/img/Fantasy-Costco-by-Ryanphantom.png" id="logo" class="non-desktop"></a>
+            <div class="icon-menu small">
+                <div class="location-div">
+                    <span class="glyphicon glyphicon-map-marker nav-icon"></span>
+                    <p style="margin-top:0px">Locations</p>
+                </div>
+                <div class="account-div">
+                    <a href="{{action('UsersController@index')}}">
+                    <span class="glyphicon glyphicon-user nav-icon"></span></span>
+                    <p style="margin-top:0px">Account</p></a>
+                </div>
+                <div class="cart-div">
+                    <a href="{{action('HomeController@viewCart')}}"><span class="glyphicon glyphicon-shopping-cart nav-icon"></span>
+                    <p>Cart</p></a>
+                </div>
             </div>
-            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
-                <span class="glyphicon sm-icon glyphicon-user"></span>
-                <span style="font-size:1rem">Account</span>
+            <div class="links-bar medium">
+                <div style="float:right">
+                    <a>Customer Service</a>
+                    <a>Register</a>
+                    <a>About</a>
+                </div>
             </div>
-            <div class="col-xs-4 nav-option" >
-                <span class="glyphicon sm-icon glyphicon-shopping-cart" ></span>
-                <span style="font-size:1rem">Cart</span>
+        </div>
+        <div class="col-xs-12 search-nav">
+            <a href="/"><img src="/img/Fantasy-Costco-by-Ryanphantom.png" id="logo" class="large"></a>
+            <div class="col-xs-2 bg-primary shop-button"><span class="glyphicon glyphicon-menu-hamburger"></span>Shop
+            </div>
+            <div class="col-xs-10 col-md-10 search-bar">
+                <input type="text" class="form-control" placeholder="Search Fantasy Costco" id="search-bar">
+                <span class="glyphicon glyphicon-search"></span>
+            </div>
+            <div class="medium icon-menu">
+                <div class="medium location-div">
+                    <span class="glyphicon glyphicon-map-marker nav-icon"></span>
+                    <p style="margin-top:0px">Locations</p>
+                </div>
+                <div class="account-div medium">
+                    <a href="{{action('UsersController@index')}}"><span class="glyphicon glyphicon-user nav-icon"></span></span>
+                    <p style="margin-top:0px">My Account</p></a>
+                </div>
+                <div class="cart-div">
+                    <a href="{{action('HomeController@viewCart')}}"><span class="glyphicon glyphicon-shopping-cart nav-icon"></span>
+                    <p>Cart</p></a>
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-xs-12">
-        <div class="col-xs-2" style="padding-left:0px;padding-right:0px">
-            <button type="button" class="btn btn-primary"><span class="glyphicon glyphicon-align-justify"></span> Shop</button>
-        </div>
-        <div class="col-xs-10 search" style="padding-right:0px;padding-left:0px;margin-left:0px">
-            <input type="text" class="form-control"><span style="float:right;margin-right:5px;top:-2.7rem;font-size:2rem" class="glyphicon glyphicon-search"></span>
-        </div>
-        <div class="md col-xs-4" style="text-align:center;padding-right:0;min-width:163px">
-            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
-                <span class="glyphicon sm-icon glyphicon-map-marker"></span>
-                <span class="align-center" style="font-size:1rem">Location</span>
-            </div>
-            <div class="col-xs-4 border-right nav-option" style="padding-right:5px;padding-left:5px">
-                <span class="glyphicon sm-icon glyphicon-user"></span>
-                <span style="font-size:1rem">Account</span>
-            </div>
-            <div class="col-xs-4 nav-option" >
-                <span class="glyphicon sm-icon glyphicon-shopping-cart" ></span>
-                <span style="font-size:1rem">Cart</span>
-            </div>
+    <div class="col-lg-12 departments-div blue large">
+        <div>
+            <a style="color:white">Equipment</a>
+            <a style="color:white">Consumables</a>
+            <a style="color:white">Weapons</a>
+            <a style="color:white">Misc</a>
         </div>
     </div>
-    <div style="width:100%;background-color: red">
-    <p>Test</p>
-    </div>
-</nav>
+    </nav>
+@if(isset($message))
+<h1>{{$message}}</h1>
+@endif
 @yield('content')
 <footer>
     <div class="footerContainer">
@@ -128,5 +94,11 @@
             </div>
         </div>
     </div>
+    @if(isset($javascript))
+        <script>
+            var theme = document.getElementById('theme');
+            theme.play();
+        </script>
+    @endif
 </body>
 </html>

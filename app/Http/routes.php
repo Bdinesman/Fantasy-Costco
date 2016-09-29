@@ -30,6 +30,3 @@ Route::post('/login','HomeController@authenticate');
 Route::get('/register','UsersController@create');
 Route::post('/register','UsersController@store');
 //Test Routes
-Route::get('/nav',function(){
-	return view('partials.nav');
-});

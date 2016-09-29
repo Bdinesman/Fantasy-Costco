@@ -8,39 +8,41 @@
 	margin-top: -24px;
 	padding-top: 30px;
 }
-@media (max-width: 667px){
+/*Mobile view*/
+@media (max-width: 670px){
 	.header{
-		height:175px;
+		height:130px;
 		color:#3071a9;
 	}
 	#logo{
-		height: 55px;
-		width:170px;
-		top: -5px;
+		height: 45px;
+		width:115px;
+		padding:5px;
 	}
 	.icon-menu{
 		position:relative;
 		float:right;
 		min-width:180px;
-		min-height:;
-		max-height: 75px;
+		height: 55px;
 		display: flex;
 		text-align:center;
 		padding:0px 10px 0 10px;
-		margin-bottom: 5px;
 		left:-15px 
 	}
 	.icon-menu>div{
 		position:relative;
-		font-size:1.8rem;
-		padding:5px 10px 0 10px;
+		font-size:1rem;
+		padding:5px 10px 0 15px;
 		float:right;
 	}
 	.nav-icon{
-		font-size:3rem;
+		font-size:2rem;
 	}
 	.cart-div{
 		width:8px;
+	}
+	.cart-div>p{
+		margin-top:0px;
 	}
 	.account-div{
 		width:66px;
@@ -49,33 +51,39 @@
 		width:66px;
 	}
 	.search-nav{
-		display:flex;	
+		display:flex;
+		position:relative;
+		top:-5px;	
 	}
 	.shop-button{
-		min-width: 125px;
-		height: 55px;
-		font-size:2.5rem;
+		width: 85px;
+		height: 40px;
+		font-size:1.4rem;
+		padding-top:5px;
 		font-weight: lighter;
-		padding: 5px;
-		padding-top: 10px;
 		text-align: center;
 		font-weight:lighter;
 	}
 	.shop-button>span{
-		font-size: 3rem;
-		margin-right:5px;
+		font-size: 2rem;
+		margin-right:2px;
+		font-weight: lighter;
 	}
 	.search-bar{
+		position: relative;
 		padding-left:0px;
+		padding-right:0px;
+		left:5px;
 	}
 	#search-bar{
-		height:55px;
+		height:40px;
+		font-size:1.5rem;
 	}
 	.glyphicon.glyphicon-search{
 		position:relative;
 		float:right;
-		font-size:3.5rem;
-		top:-3.5rem;
+		font-size:2.1rem;
+		top:-3rem;
 		margin-right: 15px;
 		-moz-transform: scaleX(-1);
         -o-transform: scaleX(-1);
@@ -83,6 +91,268 @@
         transform: scaleX(-1);
         filter: FlipH;
         -ms-filter: "FlipH"; 
+	}
+	.medium{
+		display:none;
+		width: 0px;
+	}
+	.large{
+		display:none;
+	}
+}
+@media(min-width: 670px) and (max-width: 766px){
+	#logo{
+		height: 45px;
+		width:120px;
+		padding:5px;
+		padding-left:0px;
+	}
+	.links-bar{
+		float:right;
+		font-size:1.8rem;
+		height:40px;
+		padding-right:15px;
+	}
+	.links-bar>a{
+		margin-right:25px;
+	}
+	.icon-menu{
+		position:relative;
+		float:right;
+		width:400px;
+		height: 75px;
+		display: flex;
+		text-align:center;
+		padding:0px 10px 0px 10px;
+		margin-bottom: 5px;
+		padding-left:15px;
+		top:-5px;
+	}
+	.icon-menu>div{
+		position:relative;
+		font-size:1.4rem;
+		padding:5px 10px 0 10px;
+		float:right;
+	}
+	.icon-menu>p{
+		position:relative;
+		margin-top:0px;
+	}
+	.nav-icon{
+		font-size:2.2rem;
+		padding-bottom:0px;
+	}
+	.car-div{
+		background-color: red;
+	}
+	.cart-div>p{
+		position:relative;
+		top:-5px;
+		margin-top:0px;
+	}
+	.account-div{
+		width: 100px;
+	}
+	.account-div>p{
+		position:relative;
+		top:-5px;
+	}
+	.location-div{
+		width: 100px;
+	}
+	.location-div>p{
+		position:relative;
+		top:-5px;
+	}
+	.shop-button{
+		width: 140px;
+		height: 40px;
+		font-size:1.4rem;
+		padding-top:5px;
+		font-weight: lighter;
+		text-align: center;
+		font-weight:lighter;
+	}
+	.shop-button>span{
+		font-size: 2rem;
+		margin-right:2px;
+		font-weight: lighter;
+	}
+	.search-nav{
+		display:flex;
+		position:relative;
+		margin-bottom:0px;
+	}
+	.search-bar{
+		position:relative;
+		padding-left:0px;
+		padding-right:0px;
+		left:5px;
+		min-width:20%;
+		height:40px;
+		margin-right:0px;
+	}
+	#search-bar{
+		height:40px;
+		border:1px solid #3071a9;
+		font-size:1.5rem;
+	}
+	.glyphicon.glyphicon-search{
+		position:relative;
+		float:right;
+		font-size:2.3rem;
+		top:-3rem;
+		margin-right:10px;
+		-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; 
+	}
+	.small{
+		display: none;
+	}
+	.large{
+		display:none;
+	}
+}
+/*Desktop*/
+@media (min-width: 766px){
+	.nav{
+		margin-bottom:0px;
+	}
+	.header{
+		height:150px;
+		color:#3071a9;
+		margin-bottom:0px;
+	}
+	.search-nav {
+		position:relative;
+		top:40px;
+	}
+	#logo{
+		position:relative;
+		height: 110px;
+		width:300px;
+		top: -50px;
+		padding:15px;
+		padding-left:0px;
+		display:block-inline;
+		float:left;
+	}
+	.links-bar{
+		float:left;
+		font-size:1.8rem;
+		height:20px;
+		width:100%;
+		padding-right:15px;
+	}
+	.links-bar>a{
+		margin-right:25px;
+		float:right;
+	}
+	.links-bar:last-child{
+		margin-right:0px;
+	}
+	.icon-menu{
+		position:relative;
+		float:right;
+		height: 75px;
+		display: flex;
+		text-align:center;
+		padding:0px 10px 0px 10px;
+		margin-bottom: 5px;
+		padding-left:15px;
+		top:-5px;
+	}
+	.icon-menu>div{
+		position:relative;
+		font-size:1.4rem;
+		padding:5px 10px 0 10px;
+		float:right;
+	}
+	.icon-menu>p{
+		position:relative;
+		margin-top:0px;
+	}
+	.nav-icon{
+		font-size:2.2rem;
+		padding-bottom:0px;
+	}
+	.car-div{
+		width:40px;
+	}
+	.cart-div>p{
+		position:relative;
+		top:-5px;
+		margin-top:0px;
+	}
+	.account-div{
+		width: 100px;
+	}
+	.account-div>p{
+		position:relative;
+		top:-5px;
+	}
+	.location-div{
+		width: 100px;
+	}
+	.location-div>p{
+		position:relative;
+		top:-5px;
+	}
+	.search-nav{
+		display:flex;
+		position:relative;
+		margin-bottom:0px;
+	}
+	.search-bar{
+		position: relative;
+		padding-left:0px;
+		padding-right:0px;
+		left:5px;
+		min-width:20%;
+		height:40px;
+		margin-right:0px;
+	}
+	#search-bar{
+		height:40px;
+		border:1px solid #3071a9;
+		font-size:1.5rem;
+	}
+	.glyphicon.glyphicon-search{
+		position:relative;
+		float:right;
+		font-size:2.3rem;
+		top:-3rem;
+		margin-right:10px;
+		-moz-transform: scaleX(-1);
+        -o-transform: scaleX(-1);
+        -webkit-transform: scaleX(-1);
+        transform: scaleX(-1);
+        filter: FlipH;
+        -ms-filter: "FlipH"; 
+	}
+	.departments-div{
+		position:relative;
+		float:left;
+		height:50px;
+		width:100%;
+		top:-10px;
+	}
+	.departments-div {
+		position:relative;
+		top:-10px;
+	}
+	.shop-button{
+		display:none;
+	}
+	.small{
+		display:none;
+	}
+	.non-desktop{
+		display:none;
 	}
 }
 html {
