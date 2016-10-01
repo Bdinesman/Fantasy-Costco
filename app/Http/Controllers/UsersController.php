@@ -18,13 +18,25 @@ class UsersController extends Controller
     public function index(Request $request)
     {
         if(!Auth::check()){
-            redirect('/register');
+            $request->session()->flash('alert','info');
+            $request->session()->flash('message','Please sign in to view your account');
+            return redirect('/login');
         }
         $user=Auth::user();
         $data=compact('user');
         return view('dashboard',$data);
     }
-
+    public function checkIfAvailable(Request $request){       
+        if(!$request->ajax()){
+           return abort(403);
+        }
+        $username=$request->session()->get('username');
+        $count=\App\User::where('username',$username)->get()->count();
+        if($count==0){
+            return response()->json(['alert'=>'success','message'=>$count]);
+        }
+        return response()->json(['alert'=>'danger','message'=>'This username is already taken']);
+    }
     /**
      * Show the form for creating a new resource.
      *

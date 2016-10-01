@@ -8,6 +8,18 @@
 	margin-top: -24px;
 	padding-top: 30px;
 }
+div.login{
+	height:250px;
+	padding-top:0px;
+	margin-left: 0px;
+	float:left;
+}
+form{
+	margin-top:0px;
+}
+.login {
+	float:left;
+}
 /*Mobile view*/
 @media (max-width: 670px){
 	.header{
@@ -371,6 +383,12 @@ body {
 .blue{
 	background-color:#3071a9;
 }
+.font-lighter{
+	font-weight:lighter;
+}
+.font-normal{
+	font-weight:normal;
+}
 /*Header & Navigation*/
 
 aside {
@@ -542,10 +560,6 @@ div.formInput, div.formCheckbox {
 div.formButton {
 	display: block;
 	margin-top: 5px;
-}
-
-form {
-	margin-top: 20px;
 }
 
 .col-1 {width:8.33%; float:left; padding:30px;}

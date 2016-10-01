@@ -1,4 +1,4 @@
-@extends('home')
+@extends('layouts.blade')
 @section('content')
 <div class="container">
 	@if(Session::has('alert'))

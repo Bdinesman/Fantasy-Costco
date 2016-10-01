@@ -42,6 +42,8 @@ class HomeController extends Controller
     public function addToCart(Request $request){
         if(!Auth::check()){
             //Flash to session please login
+            $alert=$request->session()->flash('alert','info');
+            $message=$request->session()->flash('message','You must be logged in to use the cart');
             return redirect('/login');
         }
         $cart = new \App\Cart();
@@ -53,7 +55,9 @@ class HomeController extends Controller
     }
     public function viewCart(Request $request){
         if(!Auth::check()){
-            return redirect('/register');
+            $request->session()->flash('alert','info');
+            $request->session()->flash('message','You must be logged in to use the cart');
+            return redirect('/login');
         }
         $total=0;
         $carts=\App\Cart::where('user_id',Auth::user()->id)->get();
@@ -102,10 +106,12 @@ class HomeController extends Controller
         $password=$request->input('password');
         if (!Auth::attempt(['email' => $email, 'password' => $password])) {
                 if (Auth::attempt(['username' => $username, 'password' => $password])) {
-                // Authentication passed...
+                    $request->session()->flash('alert','success');
+                    $request->session()->flash('message','You have successfully logged in');
                 return redirect()->intended('/');
             }
-            return "Username:$username & Password:$password";
+            $request->session()->flash('alert','danger');
+            $request->session()->flash('message','Invalid username/email or password');
             return back();
         }
         if (Auth::attempt(['email' => $email, 'password' => $password])) {
@@ -122,23 +128,23 @@ class HomeController extends Controller
         }
         return back();
     }
-    public function getLogin(){
+    public function getLogin(Request $request){
         if(Auth::check()){
             return redirect('/');
         }
-        return view('login');
+        $data=compact('request');
+        return view('login',$data);
     }
     /**
      * Display a listing of the resource.
      *
      * @return \Illuminate\Http\Response
      */
-    public function index(Request $reqeust)
+    public function index(Request $request)
     {
-        //$user=$request->session()->user();
         $message="Currently under development";
         $javascript="";
-        $data=compact('message','javascript');
+        $data=compact('message','javascript','request');
         return view('home',$data);
     }
     public function search(Request $request){

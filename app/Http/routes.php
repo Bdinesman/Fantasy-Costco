@@ -29,4 +29,5 @@ Route::get('/login','HomeController@getLogin');
 Route::post('/login','HomeController@authenticate');
 Route::get('/register','UsersController@create');
 Route::post('/register','UsersController@store');
+Route::get('/checkIfAvailable','UsersController@checkIfAvailable');
 //Test Routes

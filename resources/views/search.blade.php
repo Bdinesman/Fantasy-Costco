@@ -1,15 +1,21 @@
-@extends('home')
+@extends('layouts.master')
 @section('content')
 	<style>
 		.thumbnail{
-			width:25%;
-			height:auto;
+			width:250px;
+			height:250px;
 		}
 		footer{
 			display: none;
 		}
 		.float-right{
 			float:right;
+		}
+		.item-display{
+			height:350px;
+			margin-top:10px;
+			margin-bottom: 10px;
+			padding: 15px;
 		}
 		@media (max-width:768px){
 			.hide-sm{
@@ -71,10 +77,10 @@
 	</div>
 
 	@foreach($items as $item)
-		<div class="col-xs-6 col-sm-4 col-md-4">
-			<img class="thumbnail" src="{{$item->img_path}}">
+		<div class="col-xs-6 col-sm-4 col-md-4 item-display">
+			<a href="/item/{{$item->id}}"><img class="thumbnail" src="{{$item->img_path}}"></a>
 			<p>{{$item->item_price}}</p>
-			<p>{{$item->item_name}}</p>
+			<a href="/item/{{$item->id}}"><p>{{$item->item_name}}</p></a>
 			@if($item->average_rating()==0)
 			<p>No ratings to display</p>
 			@else
